@@ -1410,8 +1410,8 @@ namespace ModularSkillScripts
 				case "endstage": Singleton<StageController>.Instance.EndStage(); break;
 				case "endbattle": Singleton<StageController>.Instance.EndBattlePhaseForcely(true); break; 
 				case "skillteamkill": break;
-                case "skillcanduel": modsa_skillModel.OverrideCanDuel(circledSection == "True"); break;
-                case "skillchangetarget": break;
+                		case "skillcanduel": modsa_skillModel.OverrideCanDuel(circledSection == "True"); break;
+                		case "skillchangetarget": break;
 				case "skilltargetnum": break;
 				case "skillcancel": break;
 				case "skillslotgive":{
@@ -1430,6 +1430,27 @@ namespace ModularSkillScripts
 					foreach (BattleUnitModel targetModel in modelList) {
 						unlockInfo_inst.UnlockPassiveStatus(targetModel.GetOriginUnitID(), pasID);
 					}
+				}
+					break;
+     				case "appearance":
+				{
+		        		List<BattleUnitModel> modelList = GetTargetModelList(circles[0]);
+					foreach (BattleUnitModel targetModel in modelList)
+					{
+						SingletonBehavior<BattleObjectManager>.Instance.GetView(targetModel).ChangeAppearance(circles[1], true);
+					}
+				}
+					break;
+    				case "coincancel":
+				{
+					foreach (string circle in circles)
+					{
+						int idx = GetNumFromParamString(circle);
+						if (idx < 0) { modsa_skillModel.DisableCoin(modsa_coinModel.GetOriginCoinIndex()); continue; }
+
+						idx = Math.Min(idx, modsa_skillModel.CoinList.Count - 1);
+						modsa_skillModel.DisableCoin(idx);
+        				}
 				}
 					break;
 			}
