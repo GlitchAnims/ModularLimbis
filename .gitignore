@@ -363,5 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Ignore Directiory.build.props
-ModularScripts/Directory.Build.props
-/ModularScripts/.idea/
+ModularSkillScripts/Directory.Build.props
+/ModularSkillScripts/.idea/
